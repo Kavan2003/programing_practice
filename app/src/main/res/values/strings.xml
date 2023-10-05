@@ -2,4 +2,5 @@
     <string name="app_name">List_Items_course</string>
     <string name="menu_image">menu image</string>
     <string name="courses">Courses</string>
+    <string name="programming_practice">programming practice</string>
 </resources>
