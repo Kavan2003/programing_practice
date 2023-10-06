@@ -5,14 +5,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION =1;
 
     public DatabaseHelper(Context context, String databaseName, String createTableSQL) {
         super(context, databaseName, null, DATABASE_VERSION);
         this.createTableSQL = createTableSQL;
     }
 
-    private String createTableSQL;
+    private final String createTableSQL;
 
     @Override
     public void onCreate(SQLiteDatabase db) {

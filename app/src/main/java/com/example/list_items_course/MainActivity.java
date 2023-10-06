@@ -1,26 +1,19 @@
 package com.example.list_items_course;
 
-import static com.example.list_items_course.R.id.arrowImageView;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private Toolbar toolbar;
     private SQLiteDatabase database;
 
     @Override
@@ -29,14 +22,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Initialize the toolbar
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Database setup
         String databaseName = "Programming.db";
-        String tableName = "PP_Course";
         String createTableSQL = "CREATE TABLE IF NOT EXISTS PP_Course (" +
+
                 "courseID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "courseImg  NVARCHAR(200) NOT NULL, "+
                 "courseName NVARCHAR(200) NOT NULL, " +
                 "IsActive BIT, " +
                 "Remarks NVARCHAR(500))";
@@ -46,25 +40,28 @@ public class MainActivity extends AppCompatActivity {
         ItemsAdder itemsAdder = new ItemsAdder(database);
 
         // Sample data for courses
+                String[] courseImg = {
+                        String.valueOf(R.mipmap.c),
+                        String.valueOf(R.mipmap.cpp),
+                        String.valueOf(R.mipmap.java),
+                        String.valueOf(R.mipmap.python),
+
+                };
         String[] courseNames = {
-                "Java", "Python", "C++", "JavaScript", "Swift",
-                "SQL", "HTML/CSS", "Ruby", "Kotlin", "PHP",
-                "React", "Angular", "Vue.js", "Node.js", "Go"
+                "C","C++","Java","Python"
         };
 
-        int[] isActiveValues = {1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1};
+        int[] isActiveValues = {1, 0, 1,1};
 
         String[] remarks = {
-                "Good", "Excellent", "Fair", "Great", "Average",
-                "Good", "Average", "Excellent", "Great", "Fair",
-                "Good", "Great", "Average", "Excellent", "Good"
+                "Good", "Excellent", "Fair", "Fair"
         };
 
         // Insert sample data into the database
         for (int i = 0; i < courseNames.length; i++) {
 
             if (!courseExists(courseNames[i])){
-                long newRowId = itemsAdder.addCourse("PP_Course", courseNames[i], isActiveValues[i], remarks[i]);
+                long newRowId = itemsAdder.addCourse("PP_Course",courseImg[i], courseNames[i], isActiveValues[i], remarks[i]);
 
                 if (newRowId == -1) {
                     Log.d("TableAdd", i + "-> Failed");
@@ -81,15 +78,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Retrieve data from the database and display it in the RecyclerView
         List<String> dataList = new ArrayList<>();
+        List<Integer> imageDataList = new ArrayList<>();
+
         Cursor cursor = database.rawQuery("SELECT * FROM PP_Course", null);
 
         while (cursor.moveToNext()) {
+            int image = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("courseImg")));
             String name = cursor.getString(cursor.getColumnIndexOrThrow("courseName"));
+            imageDataList.add(image);
             dataList.add(name);
         }
         cursor.close();
 
-        AdapterMainScreen adapter = new AdapterMainScreen(dataList,MainActivity.this);
+        AdapterMainScreen adapter = new AdapterMainScreen(dataList,imageDataList,MainActivity.this);
         recyclerView.setAdapter(adapter);
 
 

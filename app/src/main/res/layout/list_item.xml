@@ -14,7 +14,12 @@
 
         android:orientation="horizontal"
         >
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="50sp"
+    android:id="@+id/courseNameImageView"
 
+    android:contentDescription="@string/imagelogo" />
         <TextView
             android:id="@+id/courseNameTextView"
             android:layout_width="0dp"

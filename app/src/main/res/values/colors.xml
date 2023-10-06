@@ -4,6 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name= "primary_text_color">#101010</color>
     <color name="primary">#37474F</color>
-    <color name="line_seprator">#505050</color>
+    <color name="line_seprator">#A0A0A0</color>
 
 </resources>

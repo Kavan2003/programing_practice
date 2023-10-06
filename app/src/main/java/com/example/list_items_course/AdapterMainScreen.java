@@ -7,19 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public class AdapterMainScreen extends RecyclerView.Adapter<AdapterMainScreen.MyViewHolder> {
-    private List<String> dataList;
-    private Context context; // Declare a Context variable
+    private final List<String> dataList;
+    private final List<Integer> imageDataList;
+    private final Context context; // Declare a Context variable
 
-    public AdapterMainScreen(List<String> dataList, Context context) {
+    public AdapterMainScreen(List<String> dataList,List<Integer> ImagedataList, Context context) {
         this.dataList = dataList;
+        this.imageDataList = ImagedataList;
         this.context = context; // Initialize the context variable
     }
 
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
@@ -29,19 +34,18 @@ public class AdapterMainScreen extends RecyclerView.Adapter<AdapterMainScreen.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String item = dataList.get(position);
+        int image = imageDataList.get(position) ;
         holder.textView.setText(item);
+        holder.courseNameImageView.setImageResource(image);
 
         // Add an OnClickListener for the ImageView
-        holder.arrowImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the click event here
-                // Start NextActivity when the ImageView is clicked
-                Intent intent = new Intent(context, DisplayScreen.class);
+        holder.arrowImageView.setOnClickListener(v -> {
+            // Handle the click event here
+            // Start NextActivity when the ImageView is clicked
+            Intent intent = new Intent(context, DisplayScreen.class);
 
-                intent.putExtra("itemNameTextView",item );
-                context.startActivity(intent);
-            }
+            intent.putExtra("itemNameTextView",item );
+            context.startActivity(intent);
         });
     }
 
@@ -53,9 +57,10 @@ public class AdapterMainScreen extends RecyclerView.Adapter<AdapterMainScreen.My
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         ImageView arrowImageView;
-
+        ImageView courseNameImageView;
         public MyViewHolder(View itemView) {
             super(itemView);
+            courseNameImageView = itemView.findViewById(R.id.courseNameImageView);
             textView = itemView.findViewById(R.id.courseNameTextView);
             arrowImageView = itemView.findViewById(R.id.arrowImageView);
         }

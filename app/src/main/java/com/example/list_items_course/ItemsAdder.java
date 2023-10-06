@@ -4,14 +4,15 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
 public class ItemsAdder {
-    private SQLiteDatabase database;
+    private final SQLiteDatabase database;
 
     public ItemsAdder(SQLiteDatabase db) {
         database = db;
     }
 
-    public long addCourse(String tableName,String courseName, int isActive, String remarks) {
+    public long addCourse(String tableName,String courseImg, String courseName, int isActive, String remarks) {
         ContentValues values = new ContentValues();
+        values.put("courseImg",courseImg);
         values.put("courseName", courseName);
         values.put("IsActive", isActive); // 1 for true, 0 for false
         values.put("Remarks", remarks);
