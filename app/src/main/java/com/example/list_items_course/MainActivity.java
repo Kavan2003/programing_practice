@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         String.valueOf(R.mipmap.c),
                         String.valueOf(R.mipmap.cpp),
                         String.valueOf(R.mipmap.java),
+
                         String.valueOf(R.mipmap.python),
 
                 };
