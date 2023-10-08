@@ -10,9 +10,9 @@ public class ItemsAdder {
         database = db;
     }
 
-    public long addCourse(String tableName,String courseImg, String courseName, int isActive, String remarks) {
+    public long addCourse(String tableName, String courseImg, String courseName, int isActive, String remarks) {
         ContentValues values = new ContentValues();
-        values.put("courseImg",courseImg);
+        values.put("courseImg", courseImg);
         values.put("courseName", courseName);
         values.put("IsActive", isActive); // 1 for true, 0 for false
         values.put("Remarks", remarks);
@@ -21,7 +21,7 @@ public class ItemsAdder {
         return database.insert(tableName, null, values);
     }
 
-    public long addTopic(String tableName, String TopicName, int isActive, String remarks,int isRead,Integer courseIDs) {
+    public long addTopic(String tableName, String TopicName, int isActive, String remarks, int isRead, Integer courseIDs) {
         ContentValues values = new ContentValues();
 
         values.put("TopicName", TopicName);

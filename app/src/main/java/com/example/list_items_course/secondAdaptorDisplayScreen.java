@@ -1,23 +1,22 @@
 
 package com.example.list_items_course;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.LinearLayout;
-        import android.widget.TextView;
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-        import androidx.annotation.NonNull;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import java.util.List;
+import java.util.List;
 
 public class secondAdaptorDisplayScreen extends RecyclerView.Adapter<secondAdaptorDisplayScreen.MyViewHolder> {
     private final List<String> dataList;
     private final Context context;
-
 
 
     public secondAdaptorDisplayScreen(List<String> dataList, Context context) {

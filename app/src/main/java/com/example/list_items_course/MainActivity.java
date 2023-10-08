@@ -126,18 +126,16 @@ public class MainActivity extends AppCompatActivity {
 // Corresponding CourseID values for PP_Topic
         int[] courseIDs = {1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4};
         for (int i = 0; i < topicNames.length; i++) {
-if(!TopicExists(topicNames[i]))
+            if (!TopicExists(topicNames[i])) {
+                long newRowId = itemsAdder.addTopic("PP_Topic", topicNames[i], topicIsActiveValues[i], topicRemarks[i], 0, courseIDs[i]);
 
-{
-    long newRowId = itemsAdder.addTopic("PP_Topic", topicNames[i], topicIsActiveValues[i], topicRemarks[i], 0, courseIDs[i]);
+                if (newRowId == -1) {
+                    Log.d("TableAdd", "PP_Topic " + i + "-> Failed");
+                } else {
+                    Log.d("TableAdd", "PP_Topic " + i + "-> Success");
+                }
 
-    if (newRowId == -1) {
-        Log.d("TableAdd", "PP_Topic " + i + "-> Failed");
-    } else {
-        Log.d("TableAdd", "PP_Topic " + i + "-> Success");
-    }
-
-}
+            }
         }
 
 
@@ -163,9 +161,8 @@ if(!TopicExists(topicNames[i]))
             DataIDList.add(dataId);
         }
         cursor.close();
-        AdapterMainScreen adapter = new AdapterMainScreen(dataList, imageDataList,DataIDList,MainActivity.this);
+        AdapterMainScreen adapter = new AdapterMainScreen(dataList, imageDataList, DataIDList, MainActivity.this);
         recyclerView.setAdapter(adapter);
-
 
 
     }
@@ -175,9 +172,10 @@ if(!TopicExists(topicNames[i]))
         Cursor cursor = database.rawQuery("SELECT courseID ,courseImg, courseName,  courseName, Remarks FROM PP_Course WHERE courseName=?", new String[]{courseName});
         boolean exists = cursor.moveToFirst();
         cursor.close();
-        Log.d("TAG", "courseExists: "+exists);
+        Log.d("TAG", "courseExists: " + exists);
         return exists;
     }
+
     private boolean TopicExists(String TopicName) {
         Cursor cursor = database.rawQuery("SELECT * FROM PP_Topic WHERE TopicName=?", new String[]{TopicName});
         boolean exists = cursor.moveToFirst();

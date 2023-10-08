@@ -21,7 +21,7 @@ public class AdapterMainScreen extends RecyclerView.Adapter<AdapterMainScreen.My
 
     private final Context context; // Declare a Context variable
 
-    public AdapterMainScreen(List<String> dataList,List<Integer> ImagedataList, List<Integer> DataIDList, Context context) {
+    public AdapterMainScreen(List<String> dataList, List<Integer> ImagedataList, List<Integer> DataIDList, Context context) {
         this.dataList = dataList;
         this.imageDataList = ImagedataList;
         this.DataIDList = DataIDList;
@@ -38,20 +38,19 @@ public class AdapterMainScreen extends RecyclerView.Adapter<AdapterMainScreen.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String item = dataList.get(position);
-        int image = imageDataList.get(position) ;
+        int image = imageDataList.get(position);
         Integer id = DataIDList.get(position);
         holder.textView.setText(item);
         holder.courseNameImageView.setImageResource(image);
         // Add an OnClickListener for the ImageView
 
 
-
         holder.ListItemClick.setOnClickListener(v -> {
             // Handle the click event here
             // Start NextActivity when the ImageView is clicked
             Intent intent = new Intent(context, DisplayScreen.class);
-            intent.putExtra("itemId",id);
-            intent.putExtra("itemNameTextView",item );
+            intent.putExtra("itemId", id);
+            intent.putExtra("itemNameTextView", item);
             context.startActivity(intent);
         });
 
@@ -65,8 +64,9 @@ public class AdapterMainScreen extends RecyclerView.Adapter<AdapterMainScreen.My
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         ImageView arrowImageView;
-        LinearLayout ListItemClick ;
+        LinearLayout ListItemClick;
         ImageView courseNameImageView;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             courseNameImageView = itemView.findViewById(R.id.courseNameImageView);

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION =1;
+    private static final int DATABASE_VERSION = 1;
 
     public DatabaseHelper(Context context, String databaseName, String[] createTableSQL) {
         super(context, databaseName, null, DATABASE_VERSION);
@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    private  String[] createTableSQL =null;
+    private String[] createTableSQL = null;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -30,7 +30,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // This method is called when the database version changes.
         // You can implement migration logic here if necessary.
     }
-    public  Cursor readTopicData(String TABLE_NAME, String COLUMN_TOPIC_ID, String COLUMN_TOPIC_NAME) {
+
+    public Cursor readTopicData(String TABLE_NAME, String COLUMN_TOPIC_ID, String COLUMN_TOPIC_NAME) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String[] projection = {
