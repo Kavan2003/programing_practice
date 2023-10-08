@@ -126,13 +126,18 @@ public class MainActivity extends AppCompatActivity {
 // Corresponding CourseID values for PP_Topic
         int[] courseIDs = {1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4};
         for (int i = 0; i < topicNames.length; i++) {
-            long newRowId = itemsAdder.addTopic("PP_Topic", topicNames[i], topicIsActiveValues[i], topicRemarks[i], 0, courseIDs[i]);
+if(!TopicExists(topicNames[i]))
 
-            if (newRowId == -1) {
-                Log.d("TableAdd", "PP_Topic " + i + "-> Failed");
-            } else {
-                Log.d("TableAdd", "PP_Topic " + i + "-> Success");
-            }
+{
+    long newRowId = itemsAdder.addTopic("PP_Topic", topicNames[i], topicIsActiveValues[i], topicRemarks[i], 0, courseIDs[i]);
+
+    if (newRowId == -1) {
+        Log.d("TableAdd", "PP_Topic " + i + "-> Failed");
+    } else {
+        Log.d("TableAdd", "PP_Topic " + i + "-> Success");
+    }
+
+}
         }
 
 
@@ -168,6 +173,13 @@ public class MainActivity extends AppCompatActivity {
     // Helper function to check if a course with the given name exists in the database
     private boolean courseExists(String courseName) {
         Cursor cursor = database.rawQuery("SELECT courseID ,courseImg, courseName,  courseName, Remarks FROM PP_Course WHERE courseName=?", new String[]{courseName});
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+        Log.d("TAG", "courseExists: "+exists);
+        return exists;
+    }
+    private boolean TopicExists(String TopicName) {
+        Cursor cursor = database.rawQuery("SELECT * FROM PP_Topic WHERE TopicName=?", new String[]{TopicName});
         boolean exists = cursor.moveToFirst();
         cursor.close();
         return exists;
