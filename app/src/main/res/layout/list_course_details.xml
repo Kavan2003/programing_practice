@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
-    android:id="@+id/ListItemClick"
+    android:id="@+id/ListTopicClick"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
@@ -16,31 +16,25 @@
 
         android:orientation="horizontal"
         >
-<ImageView
-    android:layout_width="40sp"
-    android:layout_height="40sp"
-    android:id="@+id/courseNameImageView"
-    android:layout_marginStart="5sp"
-android:layout_weight="10"
-    android:layout_gravity="center_vertical"
-    android:contentDescription="@string/imagelogo" />
+
         <TextView
-            android:id="@+id/courseNameTextView"
+            android:id="@+id/TopicNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="80"
-android:layout_marginStart="5sp"
+            android:layout_marginStart="5sp"
             android:gravity="start"
+            android:layout_marginLeft="10sp"
             android:textSize="16sp"
             android:layout_gravity="center"
             android:textColor="@color/primary"
             tools:ignore="RtlSymmetry" />
 
         <ImageView
-            android:id="@+id/arrowImageView"
             android:layout_width="48sp"
             android:layout_height="48dp"
             android:layout_weight="5"
+            android:clickable="true"
             android:contentDescription="@string/arrow"
             android:focusable="true"
             android:src="@drawable/ic_arrow_right_foreground"

@@ -20,4 +20,18 @@ public class ItemsAdder {
         // Insert the record into the "courses" table
         return database.insert(tableName, null, values);
     }
+
+    public long addTopic(String tableName, String TopicName, int isActive, String remarks,int isRead,Integer courseIDs) {
+        ContentValues values = new ContentValues();
+
+        values.put("TopicName", TopicName);
+        values.put("courseID", courseIDs);
+        values.put("IsActive", isActive); // 1 for true, 0 for false
+        values.put("Remarks", remarks);
+        values.put("isRead", isRead);
+
+
+        // Insert the record into the "courses" table
+        return database.insert(tableName, null, values);
+    }
 }
