@@ -16,11 +16,13 @@ import java.util.List;
 
 public class secondAdaptorDisplayScreen extends RecyclerView.Adapter<secondAdaptorDisplayScreen.MyViewHolder> {
     private final List<String> dataList;
+    List<Integer> dataIdList ;
     private final Context context;
 
 
-    public secondAdaptorDisplayScreen(List<String> dataList, Context context) {
+    public secondAdaptorDisplayScreen(List<Integer> dataIdList , List<String> dataList, Context context) {
         this.dataList = dataList;
+        this.dataIdList = dataIdList;
         this.context = context;
     }
 
@@ -31,14 +33,22 @@ public class secondAdaptorDisplayScreen extends RecyclerView.Adapter<secondAdapt
         return new MyViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String item = dataList.get(position);
         holder.textView.setText(item);
 
         holder.ListItemClick.setOnClickListener(v -> {
-            Intent intent = new Intent(context, DisplayScreen.class);
-            intent.putExtra("itemNameTextView", item);
+            Intent intent = new Intent(context, Progamming_question.class);
+
+
+            intent.putExtra("QuestionTextView", item);
+            if(dataIdList!=null)
+            {
+                intent.putExtra("QuestionId", dataIdList.get(position));
+
+            }
             context.startActivity(intent);
         });
     }

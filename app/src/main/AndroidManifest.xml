@@ -13,6 +13,9 @@
         android:theme="@style/Theme.List_Items_course"
         tools:targetApi="31" >
         <activity
+            android:name=".Progamming_question"
+            android:exported="false" />
+        <activity
             android:name=".DisplayScreen"
             android:exported="false" />
         <activity

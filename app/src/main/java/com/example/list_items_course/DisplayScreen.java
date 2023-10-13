@@ -20,7 +20,7 @@ public class DisplayScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_screen);
         String itemName = getIntent().getStringExtra("itemNameTextView");
-        Integer itemid = getIntent().getIntExtra("itemId", -1);
+        int itemid = getIntent().getIntExtra("itemId", -1);
 
 
         // Find the TextView in your layout
@@ -41,17 +41,23 @@ public class DisplayScreen extends AppCompatActivity {
         DatabaseHelper dbHelper = new DatabaseHelper(DisplayScreen.this, "Programming.db", null);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         Log.d("TAG", "onCreate: " + itemid);
-        Cursor cursor = database.rawQuery("SELECT TopicName FROM PP_Topic where CourseID  = " + itemid, null);
+
+        Cursor cursor = database.rawQuery("SELECT TopicName , TopicID FROM PP_Topic where CourseID  = " + itemid, null);
         List<String> dataList = new ArrayList<>();
+        List<Integer> dataIdList = new ArrayList<>();
         String name;
+        int id;
         while (cursor.moveToNext()) {
 
             name = cursor.getString(cursor.getColumnIndexOrThrow("TopicName"));
 
+            id=cursor.getInt(cursor.getColumnIndexOrThrow("TopicID"));
+
             dataList.add(name);
+            dataIdList.add(id);
         }
         cursor.close();
-        secondAdaptorDisplayScreen adapter = new secondAdaptorDisplayScreen(dataList, DisplayScreen.this);
+        secondAdaptorDisplayScreen adapter = new secondAdaptorDisplayScreen(dataIdList,dataList, DisplayScreen.this);
         recyclerView.setAdapter(adapter);
 
 

@@ -29,121 +29,20 @@ public class MainActivity extends AppCompatActivity {
         String databaseName = "Programming.db";
         String[] createTableSQL = {
                 "CREATE TABLE IF NOT EXISTS PP_Course (courseID INTEGER PRIMARY KEY AUTOINCREMENT, courseImg  NVARCHAR(200) NOT NULL, courseName NVARCHAR(200) NOT NULL, IsActive BIT, Remarks NVARCHAR(500));",
-                "CREATE TABLE IF NOT EXISTS PP_Topic (TopicID INTEGER PRIMARY KEY AUTOINCREMENT, TopicName NVARCHAR(200) NOT NULL, CourseID INTEGER, IsActive BIT, Remarks NVARCHAR(500), IsRead BIT, CONSTRAINT fk_PP_Course FOREIGN KEY (CourseID) REFERENCES PP_Course(courseID));"
-
+                "CREATE TABLE IF NOT EXISTS PP_Topic (TopicID INTEGER PRIMARY KEY AUTOINCREMENT, TopicName NVARCHAR(200) NOT NULL, CourseID INTEGER, IsActive BIT, Remarks NVARCHAR(500), IsRead BIT, CONSTRAINT fk_PP_Course FOREIGN KEY (CourseID) REFERENCES PP_Course(courseID));",
+                "CREATE TABLE IF NOT EXISTS PP_Program (ProgramID INTEGER PRIMARY KEY AUTOINCREMENT,TopicID INTEGER,ProgramStatement NVARCHAR(5000) NOT NULL ,ProgramSolution NVARCHAR(20000) NOT NULL,  IsRead BIT, Remarks NVARCHAR(500), CONSTRAINT fk_PP_Topic FOREIGN KEY (TopicID) REFERENCES PP_Topic(TopicID));"
         };
         DatabaseHelper databaseHelper = new DatabaseHelper(this, databaseName, createTableSQL);
         database = databaseHelper.getWritableDatabase();
         ItemsAdder itemsAdder = new ItemsAdder(database);
 
-        // Sample data for courses
-        String[] courseImg = {
-                String.valueOf(R.mipmap.c),
-                String.valueOf(R.mipmap.cpp),
-                String.valueOf(R.mipmap.java),
-
-                String.valueOf(R.mipmap.python),
-
-        };
-        String[] courseNames = {
-                "C", "C++", "Java", "Python"
-        };
-
-        int[] isActiveValues = {1, 0, 1, 1};
-
-        String[] remarks = {
-                "Good", "Excellent", "Fair", "Fair"
-        };
-
-        // Insert sample data into the database
-        for (int i = 0; i < courseNames.length; i++) {
-
-            if (!courseExists(courseNames[i])) {
-                long newRowId = itemsAdder.addCourse("PP_Course", courseImg[i], courseNames[i], isActiveValues[i], remarks[i]);
-
-                if (newRowId == -1) {
-                    Log.d("TableAdd", i + "-> Failed");
-                } else {
-                    Log.d("TableAdd", i + "-> Success");
-                }
-            }
-        }
-// Sample data for PP_Topic table
-        String[] topicNames = {
-                "Introduction to C Programming",
-                "Basic Data Types in C",
-                "Control Flow in C",
-                "Functions and Procedures in C",
-                "Memory Management in C",
-
-                "Object-Oriented Concepts in C++",
-                "Inheritance and Polymorphism in C++",
-                "STL Containers in C++",
-                "Exception Handling in C++",
-                "File I/O in C++",
-
-                "Advanced Java Programming",
-                "Multithreading in Java",
-                "Database Connectivity in Java",
-                "GUI Development in Java",
-                "Web Development with Java",
-
-                "Python Fundamentals",
-                "Data Structures in Python",
-                "File Handling in Python",
-                "Python Libraries and Modules",
-                "Web Scraping with Python"
-        };
-
-        int[] topicIsActiveValues = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-
-        String[] topicRemarks = {
-                "Learn the basics of C programming.",
-                "Explore different data types in C.",
-                "Understand control flow statements.",
-                "Learn about functions and procedures.",
-                "Explore memory management in C.",
-
-                "Dive into object-oriented concepts.",
-                "Understand inheritance and polymorphism.",
-                "Explore STL containers in C++.",
-                "Learn about exception handling.",
-                "Work with file I/O in C++.",
-
-                "Take your Java skills to the next level.",
-                "Learn how to work with multithreading.",
-                "Connect to databases using Java.",
-                "Develop graphical user interfaces in Java.",
-                "Explore web development with Java.",
-
-                "Get started with Python.",
-                "Explore data structures in Python.",
-                "Learn about file handling in Python.",
-                "Work with Python libraries and modules.",
-                "Learn web scraping with Python."
-        };
-
-// Corresponding CourseID values for PP_Topic
-        int[] courseIDs = {1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4};
-        for (int i = 0; i < topicNames.length; i++) {
-            if (!TopicExists(topicNames[i])) {
-                long newRowId = itemsAdder.addTopic("PP_Topic", topicNames[i], topicIsActiveValues[i], topicRemarks[i], 0, courseIDs[i]);
-
-                if (newRowId == -1) {
-                    Log.d("TableAdd", "PP_Topic " + i + "-> Failed");
-                } else {
-                    Log.d("TableAdd", "PP_Topic " + i + "-> Success");
-                }
-
-            }
-        }
+        insertData(itemsAdder);
 
 
         // RecyclerView setup
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
         // Retrieve data from the database and display it in the RecyclerView
         List<String> dataList = new ArrayList<>();
         List<Integer> imageDataList = new ArrayList<>();
@@ -167,6 +66,66 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private void insertData(ItemsAdder itemsAdder){
+
+        // Insert sample data into the database
+        for (int i = 0; i < DummyData.courseNames.length; i++) {
+
+            if (!courseExists(DummyData.courseNames[i])) {
+                long newRowId = itemsAdder.addCourse("PP_Course", DummyData.courseImg[i], DummyData.courseNames[i], DummyData.isActiveValues[i], DummyData.remarks[i]);
+
+                if (newRowId == -1) {
+                    Log.d("TableAdd", i + "-> Failed");
+                } else {
+                    Log.d("TableAdd", i + "-> Success");
+                }
+            }
+        }
+
+// Corresponding CourseID values for PP_Topic
+
+        for (int i = 0; i < DummyData.topicNames.length; i++) {
+            if (!TopicExists(DummyData.PP_TopicID[i])) {
+                long newRowId = itemsAdder.addTopic("PP_Topic", DummyData.topicNames[i], DummyData.topicIsActiveValues[i], DummyData.topicRemarks[i], 0, DummyData.courseIDs[i],DummyData.PP_TopicID[i]);
+
+                if (newRowId == -1) {
+                    Log.d("TableAdd", "PP_Topic " + i + "-> Failed");
+                } else {
+                    Log.d("TableAdd", "PP_Topic " + i + "-> Success");
+                }
+
+            }
+        }
+        for (int i = 0; i < DummyData.topicNames.length; i++) {
+            if (!TopicExists(DummyData.PP_TopicID[i])) {
+                long newRowId = itemsAdder.addTopic("PP_Topic", DummyData.topicNames[i], DummyData.topicIsActiveValues[i], DummyData.topicRemarks[i], 0, DummyData.courseIDs[i],DummyData.PP_TopicID[i]);
+
+                if (newRowId == -1) {
+                    Log.d("TableAdd", "PP_Topic " + i + "-> Failed");
+                } else {
+                    Log.d("TableAdd", "PP_Topic " + i + "-> Success");
+                }
+
+            }
+
+        }
+
+        for (int i = 0; i < DummyData.programStatements.length; i++) {
+        if(!programExists(DummyData.PP_TopicID[i])){
+            long newRowId = itemsAdder.addProgram("PP_Program", DummyData.programStatements[i], DummyData.programSolutions[i], DummyData.programIsReadValues[i], DummyData.programRemarks[i], DummyData.programTopicIDs[i]);
+
+            if (newRowId == -1) {
+                Log.d("TableAdd", "PP_Program " + i + "-> Failed");
+            } else {
+                Log.d("TableAdd", "PP_Program " + i + "-> Success");
+            }
+        }
+        }
+
+
+    }
+
     // Helper function to check if a course with the given name exists in the database
     private boolean courseExists(String courseName) {
         Cursor cursor = database.rawQuery("SELECT courseID ,courseImg, courseName,  courseName, Remarks FROM PP_Course WHERE courseName=?", new String[]{courseName});
@@ -176,11 +135,22 @@ public class MainActivity extends AppCompatActivity {
         return exists;
     }
 
-    private boolean TopicExists(String TopicName) {
-        Cursor cursor = database.rawQuery("SELECT * FROM PP_Topic WHERE TopicName=?", new String[]{TopicName});
+    private boolean TopicExists(Integer TopicID) {
+        Cursor cursor = database.rawQuery("SELECT * FROM PP_Topic WHERE TopicID=?", new String[]{String.valueOf(TopicID)});
         boolean exists = cursor.moveToFirst();
+        Log.d("TAG", "topicExists: " + exists);
         cursor.close();
+
         return exists;
     }
+    private boolean programExists(Integer programID) {
+        Cursor cursor = database.rawQuery("SELECT * FROM PP_Program WHERE ProgramID=?", new String[]{String.valueOf(programID)});
+        boolean exists = cursor.moveToFirst();
+        Log.d("TAG", "programExists: " + exists);
+        cursor.close();
 
+        return exists;
+    }
 }
+
+

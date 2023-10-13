@@ -22,6 +22,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Create the table when the database is first created
         db.execSQL(createTableSQL[0]);
         db.execSQL(createTableSQL[1]);
+        db.execSQL(createTableSQL[2]);
+
     }
 
     @Override

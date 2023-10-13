@@ -21,9 +21,9 @@ public class ItemsAdder {
         return database.insert(tableName, null, values);
     }
 
-    public long addTopic(String tableName, String TopicName, int isActive, String remarks, int isRead, Integer courseIDs) {
+    public long addTopic(String tableName, String TopicName, int isActive, String remarks, int isRead, Integer courseIDs,int TopicID) {
         ContentValues values = new ContentValues();
-
+        values.put("TopicID",TopicID);
         values.put("TopicName", TopicName);
         values.put("courseID", courseIDs);
         values.put("IsActive", isActive); // 1 for true, 0 for false
@@ -32,6 +32,17 @@ public class ItemsAdder {
 
 
         // Insert the record into the "courses" table
+        return database.insert(tableName, null, values);
+    }
+    public long addProgram(String tableName, String programStatement, String programSolution, int isRead, String remarks, int topicID) {
+        ContentValues values = new ContentValues();
+        values.put("TopicID", topicID);
+        values.put("ProgramStatement", programStatement);
+        values.put("ProgramSolution", programSolution);
+        values.put("IsRead", isRead); // 1 for true, 0 for false
+        values.put("Remarks", remarks);
+
+        // Insert the record into the "PP_Program" table
         return database.insert(tableName, null, values);
     }
 }
