@@ -7,4 +7,8 @@
     <string name="programming_practice">Programming Practice</string>
     <string name="arrow">Arrow</string>
     <string name="imagelogo">imagelogo</string>
+    <string name="container">container</string>
+    <string name="report">report</string>
+    <string name="share">share</string>
+    <string name="mark_as_read">Mark As Read</string>
 </resources>

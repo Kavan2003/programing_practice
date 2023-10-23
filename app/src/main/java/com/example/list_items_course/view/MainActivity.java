@@ -1,4 +1,4 @@
-package com.example.list_items_course;
+package com.example.list_items_course.view;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.list_items_course.ViewModel.AdapterMainScreen;
+import com.example.list_items_course.Model.DatabaseHelper;
+import com.example.list_items_course.Model.DummyData;
+import com.example.list_items_course.Model.ItemsAdder;
+import com.example.list_items_course.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 // Corresponding CourseID values for PP_Topic
 
         for (int i = 0; i < DummyData.topicNames.length; i++) {
-            if (!TopicExists(DummyData.PP_TopicID[i])) {
+            if (TopicExists(DummyData.PP_TopicID[i])) {
                 long newRowId = itemsAdder.addTopic("PP_Topic", DummyData.topicNames[i], DummyData.topicIsActiveValues[i], DummyData.topicRemarks[i], 0, DummyData.courseIDs[i],DummyData.PP_TopicID[i]);
 
                 if (newRowId == -1) {
@@ -98,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         for (int i = 0; i < DummyData.topicNames.length; i++) {
-            if (!TopicExists(DummyData.PP_TopicID[i])) {
+            if (TopicExists(DummyData.PP_TopicID[i])) {
                 long newRowId = itemsAdder.addTopic("PP_Topic", DummyData.topicNames[i], DummyData.topicIsActiveValues[i], DummyData.topicRemarks[i], 0, DummyData.courseIDs[i],DummyData.PP_TopicID[i]);
 
                 if (newRowId == -1) {
@@ -141,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TAG", "topicExists: " + exists);
         cursor.close();
 
-        return exists;
+        return !exists;
     }
     private boolean programExists(Integer programID) {
         Cursor cursor = database.rawQuery("SELECT * FROM PP_Program WHERE ProgramID=?", new String[]{String.valueOf(programID)});

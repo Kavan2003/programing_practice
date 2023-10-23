@@ -1,4 +1,4 @@
-package com.example.list_items_course;
+package com.example.list_items_course.ViewModel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.list_items_course.R;
+import com.example.list_items_course.view.DisplayScreen;
 
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class AdapterMainScreen extends RecyclerView.Adapter<AdapterMainScreen.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_courses, parent, false);
         return new MyViewHolder(view);
     }
 

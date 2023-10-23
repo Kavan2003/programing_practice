@@ -1,4 +1,4 @@
-package com.example.list_items_course;
+package com.example.list_items_course.Model;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;

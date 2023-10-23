@@ -1,7 +1,6 @@
-package com.example.list_items_course;
+package com.example.list_items_course.Model;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -31,33 +30,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Handle database upgrades if needed
         // This method is called when the database version changes.
         // You can implement migration logic here if necessary.
-    }
-
-    public Cursor readTopicData(String TABLE_NAME, String COLUMN_TOPIC_ID, String COLUMN_TOPIC_NAME) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String[] projection = {
-                COLUMN_TOPIC_ID,
-                COLUMN_TOPIC_NAME,
-                // Add other column names here
-        };
-
-        // You can define selection, selectionArgs, and sortOrder as needed.
-        String selection = null;
-        String[] selectionArgs = null;
-        String sortOrder = null;
-
-        Cursor cursor = db.query(
-                TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                sortOrder
-        );
-
-        return cursor;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.list_items_course;
+package com.example.list_items_course.view;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +9,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.list_items_course.Model.DatabaseHelper;
+import com.example.list_items_course.R;
+import com.example.list_items_course.ViewModel.secondAdaptorDisplayScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +35,8 @@ public class DisplayScreen extends AppCompatActivity {
 
         if (itemName != null) {
             itemNameTextView.setText(itemName);
-        } else {
-            itemNameTextView.setText("itemName");
-        }
+        }  //            itemNameTextView.setText("itemName");
+
 
         RecyclerView recyclerView = findViewById(R.id.recyclerViewForDetails);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
