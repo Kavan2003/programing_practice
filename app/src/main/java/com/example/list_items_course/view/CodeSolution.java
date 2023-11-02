@@ -34,7 +34,7 @@ TextView ProblemTextView = findViewById(R.id.ProblemTextView);
 TextView QuestionTextView = findViewById(R.id.Topic);
 
         ImageButton share = findViewById(R.id.share);
-        ImageButton report = findViewById(R.id.report);
+//        ImageButton report = findViewById(R.id.report);
 Button markAsRead = findViewById(R.id.markAsRead);
 
 
@@ -61,26 +61,38 @@ Button markAsRead = findViewById(R.id.markAsRead);
                 
 
             }
-
+        final int[] isRead = {0};
         markAsRead.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ContentValues values = new ContentValues();
-                values.put("IsRead", 1);
 
+
+                ContentValues values = new ContentValues();
+                if(isRead[0] ==0)
+                values.put("IsRead", 1);
+                else
+                    values.put("IsRead", 0);
                 String whereClause = "ProgramID = ?"; // You need to specify which program you want to update by ProgramID
                 String[] whereArgs = new String[] { String.valueOf(probileId) }; // Replace programId with the actual program ID you want to mark as read
 
                 int rowsUpdated = database.update("PP_Program", values, whereClause, whereArgs);
 
                 if (rowsUpdated > 0) {
-                    Toast.makeText(CodeSolution.this, "Success", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CodeSolution.this, "Success", Toast.LENGTH_SHORT).show();
+                    isRead[0] =isRead[0]==0?1:0;
+
 
                 } else {
-                    Toast.makeText(CodeSolution.this, "Failed", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(CodeSolution.this, "Failed", Toast.LENGTH_SHORT).show();
+
 
                     // No rows were updated (perhaps the program with the specified ProgramID doesn't exist)
                     // You can handle this case accordingly
                 }
+if(isRead[0] ==1)
+                markAsRead.setText(R.string.mark_as_unread);
+else
+    markAsRead.setText(R.string.mark_as_read);
+
             }
         });
 
@@ -95,12 +107,12 @@ Button markAsRead = findViewById(R.id.markAsRead);
                     shareContent(finalProgramStatement +"\n\n"+ finalProgramSolution);
                 }
         });
-        report.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                sendReportByEmail("kavanthosani2003@gmail.com",probileId+"\n\n"+finalProgramStatement +"\n\n"+ finalProgramSolution);
-            }
-        });
+//        report.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                sendReportByEmail("kavanthosani2003@gmail.com",probileId+"\n\n"+finalProgramStatement +"\n\n"+ finalProgramSolution);
+//            }
+//        });
 
         // Find the WebView in the layout
         TextView webView = findViewById(R.id.codeWebView);

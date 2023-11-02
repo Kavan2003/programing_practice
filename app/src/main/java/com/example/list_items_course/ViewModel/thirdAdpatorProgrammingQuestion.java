@@ -15,6 +15,7 @@ import com.example.list_items_course.view.CodeSolution;
 import com.example.list_items_course.R;
 
 import java.util.List;
+import java.util.Locale;
 
 public class thirdAdpatorProgrammingQuestion extends RecyclerView.Adapter<thirdAdpatorProgrammingQuestion.MyViewHolder> {
     private final List<String> dataList;
@@ -47,8 +48,8 @@ this.question = question;
         String item = dataList.get(position);
         holder.textView.setText(item);
 
-            holder.TopicSerialNumberTextView.setText("");
-            holder.TopicSerialNumberTextView.setVisibility(View.GONE);
+        holder.TopicSerialNumberTextView.setText(String.format(Locale.US, "%d.", position + 1));
+
 
 
         holder.ListItemClick.setOnClickListener(v -> {

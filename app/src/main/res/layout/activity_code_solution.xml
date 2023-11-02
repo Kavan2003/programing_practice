@@ -33,74 +33,87 @@
                     android:layout_gravity="center"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
+
                     android:padding="0dp"
                     tools:ignore="UseCompoundDrawables">
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.7"
+    android:orientation="horizontal"
+>
 
-                    <ImageView
-                        android:layout_width="80sp"
-                        android:layout_height="50sp"
-                        android:layout_gravity="start"
-                        android:layout_margin="0dp"
-                        android:contentDescription="@string/menu_image"
-                        android:src="@drawable/ic_menu_foreground" />
+    <ImageView
+        android:layout_width="80sp"
+        android:layout_height="50sp"
+        android:layout_gravity="start"
+        android:layout_margin="0dp"
+        android:contentDescription="@string/menu_image"
+        android:src="@drawable/ic_menu_foreground" />
 
-                    <TextView
-                        android:id="@+id/Topic"
+    <TextView
+        android:id="@+id/Topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+</LinearLayout>
+
+
+
+                    <ImageButton
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:layout_height="50sp"
+                        android:clickable="true"
+                        android:id="@+id/share"
+                        android:layout_marginEnd="5sp"
+                        android:backgroundTint="@color/primary"
+                        android:gravity="center"
+                        android:src="@mipmap/shareicon"
+                        android:contentDescription="@string/share"
+                        android:focusable="true" />
 
                 </LinearLayout>
 
             </androidx.appcompat.widget.Toolbar>
+
         </com.google.android.material.appbar.AppBarLayout>
 
 
+        <TextView
+            android:id="@+id/ProblemTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5sp"
+            android:background="@drawable/rounded_corner_rectangle"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="20sp"
+            android:paddingTop="10sp"
+
+            android:paddingRight="20sp"
+            android:paddingBottom="05sp"
+            android:textColor="@color/primary_text_color"
+            android:textSize="14sp" />
 
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20sp"/>
-
-            <TextView
-                android:id="@+id/ProblemTextView"
-                android:textColor="@color/primary_text_color"
-                android:layout_width="wrap_content"
-                android:background="@drawable/rounded_corner_rectangle"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20sp"
-                android:paddingRight="10sp"
-                android:paddingTop="20sp"
-                android:layout_margin="10sp"
-
-                android:paddingBottom="20sp"
-                android:layout_gravity="center"
-                android:textSize="14sp" />
-
-<Space
-    android:layout_width="match_parent"
-    android:layout_height="20sp"/>
-
-
-    <TextView
+        <TextView
             android:id="@+id/codeWebView"
-android:layout_margin="10sp"
-        android:textColor="@color/primary_text_color"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_corner_rectangle"
-        android:layout_height="wrap_content"
-       android:paddingLeft="20sp"
-        android:paddingRight="20sp"
-        android:paddingTop="20sp"
-        android:paddingBottom="20sp"
-        android:textSize="14sp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5sp"
+            android:background="@drawable/rounded_corner_rectangle"
+            android:fontFamily="@font/courier_new"
+            android:paddingLeft="20sp"
+            android:paddingTop="10sp"
+            android:paddingRight="20sp"
+            android:paddingBottom="05sp"
+            android:textColor="@color/primary_text_color"
+            android:textSize="12sp" />
 
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20sp"/>
 
 
 <LinearLayout
@@ -116,44 +129,12 @@ android:layout_margin="10sp"
 android:clickable="true"
         android:id="@+id/markAsRead"
         android:textSize="14sp"
+        android:layout_margin="5sp"
         android:textColor="@color/white"
         android:background="@drawable/rectangular_button"
         android:backgroundTint="@color/primary"
-
         android:focusable="true" />
-<Space
-    android:layout_width="30sp"
-    android:layout_height="wrap_content"/>
-    <ImageButton
-        android:layout_width="70sp"
-        android:layout_height="60sp"
-        android:clickable="true"
-        android:id="@+id/share"
-        android:layout_marginStart="5sp"
-        android:backgroundTint="@color/primary"
-        android:gravity="center"
-        android:paddingTop="10sp"
 
-        android:paddingBottom="10sp"
-        android:src="@drawable/share_foreground"
-        android:contentDescription="@string/share"
-        android:focusable="true" />
-    <Space
-        android:layout_width="10sp"
-        android:layout_height="wrap_content"/>
-    <ImageButton
-android:clickable="true"
-        android:id="@+id/report"
-        android:paddingTop="5sp"
-        android:paddingBottom="5sp"
-        android:layout_width="70sp"
-        android:backgroundTint="@color/primary"
-        android:layout_marginStart="5sp"
-        android:src="@drawable/report_foreground"
-        android:gravity="center"
-        android:layout_height="60sp"
-        android:focusable="true"
-        android:contentDescription="@string/report" />
 
 
 </LinearLayout>
