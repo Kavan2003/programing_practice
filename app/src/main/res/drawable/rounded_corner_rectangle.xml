@@ -5,7 +5,7 @@
     <corners android:radius="5sp" />
 
     <solid android:color="@color/white" />
-    <stroke android:width="1sp" android:color="@color/line_seprator" />
+<!--    <stroke android:width="1sp" android:color="@color/line_seprator" />-->
 
 
 

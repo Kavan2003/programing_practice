@@ -20,16 +20,18 @@ import java.util.Locale;
 
 public class secondAdaptorDisplayScreen extends RecyclerView.Adapter<secondAdaptorDisplayScreen.MyViewHolder> {
     private final List<String> dataList;
+    List<Integer> topicIsRead;
 //    private final List<String> dataTopicList;
 
     List<Integer> dataIdList ;
     private final Context context;
 
 
-    public secondAdaptorDisplayScreen(List<Integer> dataIdList , List<String> dataList, Context context ) {
+    public secondAdaptorDisplayScreen(List<Integer> dataIdList , List<String> dataList, List<Integer>topicIsRead,Context context ) {
 
         this.dataList = dataList;
         this.dataIdList = dataIdList;
+        this.topicIsRead = topicIsRead;
 
         this.context = context;
 
@@ -47,6 +49,12 @@ public class secondAdaptorDisplayScreen extends RecyclerView.Adapter<secondAdapt
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String item = dataList.get(position);
         holder.textView.setText(item);
+        if(topicIsRead.get(position)==0)
+        {
+            holder.textView.getTypeface();
+            holder.textView.setTypeface(null, android.graphics.Typeface.BOLD);
+            holder.TopicSerialNumberTextView.setTypeface(null, android.graphics.Typeface.BOLD);
+        }
 
 
             holder.TopicSerialNumberTextView.setText(String.format(Locale.US, "%d.", position + 1));

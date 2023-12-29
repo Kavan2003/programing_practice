@@ -2,6 +2,7 @@ package com.example.list_items_course.ViewModel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.Locale;
 
 public class thirdAdpatorProgrammingQuestion extends RecyclerView.Adapter<thirdAdpatorProgrammingQuestion.MyViewHolder> {
     private final List<String> dataList;
+    List<Integer> problemIsRead;
 //    private final List<String> dataTopicList;
 
     List<Integer> dataIdList ;
@@ -27,9 +29,10 @@ public class thirdAdpatorProgrammingQuestion extends RecyclerView.Adapter<thirdA
     String question;
 
 
-    public thirdAdpatorProgrammingQuestion(List<Integer> dataIdList , List<String> dataList, Context context, String question) {
+    public thirdAdpatorProgrammingQuestion(List<Integer> dataIdList , List<String> dataList, List<Integer> problemIsRead,Context context, String question) {
         this.dataList = dataList;
         this.dataIdList = dataIdList;
+        this.problemIsRead = problemIsRead;
 this.question = question;
         this.context = context;
 
@@ -47,9 +50,14 @@ this.question = question;
     public void onBindViewHolder(thirdAdpatorProgrammingQuestion.MyViewHolder holder, int position) {
         String item = dataList.get(position);
         holder.textView.setText(item);
+if(problemIsRead.get(position)==0)
+{
+    holder.textView.getTypeface();
+    holder.textView.setTypeface(null, Typeface.BOLD);
+    holder.TopicSerialNumberTextView.setTypeface(null, Typeface.BOLD);
 
+}
         holder.TopicSerialNumberTextView.setText(String.format(Locale.US, "%d.", position + 1));
-
 
 
         holder.ListItemClick.setOnClickListener(v -> {

@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < DummyData.programStatements.length; i++) {
-        if(!programExists(DummyData.PP_TopicID[i])){
+        if(!programExists(i)){
             long newRowId = itemsAdder.addProgram("PP_Program", DummyData.programStatements[i], DummyData.programSolutions[i], DummyData.programIsReadValues[i], DummyData.programRemarks[i], DummyData.programTopicIDs[i]);
 
             if (newRowId == -1) {
@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
         return exists;
     }
+
 }
 
 
