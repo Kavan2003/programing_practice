@@ -33,8 +33,8 @@ public class CodeSolution extends AppCompatActivity {
 
         ImageButton share = findViewById(R.id.share);
 //        ImageButton report = findViewById(R.id.report);
-        Button markAsRead = findViewById(R.id.markAsRead);
-
+        TextView markAsRead = findViewById(R.id.markAsRead);
+//markAsRead.setBackgroundColor(getResources().getColor(R.color.white));
 
         DatabaseHelper dbHelper = new DatabaseHelper(CodeSolution.this, "Programming.db", null);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -97,7 +97,8 @@ public class CodeSolution extends AppCompatActivity {
 
         // Find the WebView in the layout
         TextView webView = findViewById(R.id.codeWebView);
-
+//bold
+        webView.setTextIsSelectable(true);
 
         webView.setText(ProgramSolution);
 

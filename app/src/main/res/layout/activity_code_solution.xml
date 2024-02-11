@@ -1,148 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.CodeSolution"
+    android:background="@color/grayish">
 
-    android:background="@color/grayish"
-    android:orientation="vertical">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_above="@id/buttonsLayout">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:elevation="5dp"
-                android:paddingTop="0dp"
-                app:contentInsetStart="0dp">
+                android:background="@color/primary">
 
-                <LinearLayout
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="0dp"
+                    android:elevation="5dp"
+                    android:paddingTop="0dp"
+                    app:contentInsetStart="0dp">
 
-                    android:padding="0dp"
-                    tools:ignore="UseCompoundDrawables">
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="0.7"
-    android:orientation="horizontal"
->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="0dp"
+                        tools:ignore="UseCompoundDrawables">
 
-    <ImageView
-        android:layout_width="80sp"
-        android:layout_height="50sp"
-        android:layout_gravity="start"
-        android:layout_margin="0dp"
-        android:contentDescription="@string/menu_image"
-        android:src="@drawable/ic_menu_foreground" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/Topic"
-        android:layout_width="wrap_content"
+                            <ImageView
+                                android:layout_width="80sp"
+                                android:layout_height="50sp"
+                                android:layout_gravity="start"
+                                android:layout_margin="0dp"
+                                android:contentDescription="@string/menu_image"
+                                android:src="@drawable/ic_menu_foreground" />
+
+                            <TextView
+                                android:id="@+id/Topic"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/share"
+                            android:scaleType="centerCrop"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp"
+                            android:layout_marginEnd="25sp"
+                            android:backgroundTint="@color/primary"
+                            android:clickable="true"
+                            android:contentDescription="@string/share"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:src="@mipmap/share1" />
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <TextView
+                android:id="@+id/ProblemTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5sp"
+                android:background="@drawable/rounded_corner_rectangle"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="20sp"
+                android:paddingTop="10sp"
+                android:paddingRight="20sp"
+                android:paddingBottom="05sp"
+                android:textColor="@color/primary_text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/codeWebView"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="5sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginTop="0sp"
+                android:background="@drawable/rounded_corner_rectangle"
+                android:fontFamily="@font/courier_new"
+                android:textFontWeight="950"
+
+                android:paddingLeft="20sp"
+                android:paddingTop="5sp"
+                android:paddingRight="20sp"
+                android:paddingBottom="05sp"
+                android:textSize="14sp"
+                tools:targetApi="p" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-</LinearLayout>
-
-
-                    <ImageButton
-                        android:id="@+id/share"
-                        android:scaleType="centerCrop"
-                        android:layout_height="50dp"
-                        android:layout_width="50dp"
-
-                        android:layout_marginEnd="25sp"
-                        android:backgroundTint="@color/primary"
-                        android:clickable="true"
-                        android:contentDescription="@string/share"
-
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:src="@mipmap/share1" />
-
-                </LinearLayout>
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
+        android:orientation="horizontal"
+        android:gravity="center"
+    android:background="@color/grayish"
+        android:layout_alignParentBottom="true">
 
         <TextView
-            android:id="@+id/ProblemTextView"
+            android:id="@+id/markAsRead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_margin="5sp"
-            android:background="@drawable/rounded_corner_rectangle"
-            android:fontFamily="sans-serif"
-            android:paddingLeft="20sp"
+            android:background="@drawable/rounded_button"
+            android:clickable="true"
+            android:focusable="true"
             android:paddingTop="10sp"
-
-            android:paddingRight="20sp"
-            android:paddingBottom="05sp"
+            android:paddingBottom="10sp"
+            android:text="@string/mark_as_read"
             android:textColor="@color/primary_text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="TouchTargetSizeCheck" />
 
 
-        <TextView
-            android:id="@+id/codeWebView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:background="@drawable/rounded_corner_rectangle"
-            android:fontFamily="@font/courier_new"
-            android:paddingLeft="20sp"
-            android:paddingTop="10sp"
-            android:paddingRight="20sp"
-            android:paddingBottom="05sp"
-            android:textColor="@color/primary_text_color"
-            android:textSize="12sp" />
-
-
-
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center"
-    >
-
-    <Button
-        android:id="@+id/markAsRead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5sp"
-        android:backgroundTint="@color/white"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingTop="0sp"
-        android:background="@drawable/rectangular_button"
-        android:paddingBottom="0sp"
-        android:text="@string/mark_as_read"
-        android:textColor="@color/primary"
-        android:textSize="14sp" />
-
-
-
-</LinearLayout>
     </LinearLayout>
-</ScrollView>
+</RelativeLayout>

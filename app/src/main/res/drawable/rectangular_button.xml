@@ -2,5 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/white" />
 
-    <corners android:radius="5sp" /> <!-- Set the corner radius to 0dp for sharp corners -->
+
+    <corners android:radius="05sp" />
+<solid android:color="@color/white" />
+    <stroke android:width="1sp" android:color="@color/line_seprator" />
 </shape>

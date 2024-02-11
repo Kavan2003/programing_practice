@@ -118,7 +118,94 @@ public class DummyData {
 
     public static String[] programSolutions = {
             // Solutions for Course ID 1
-            "Hii this is the solution for finding the sum of an array of integers in C.",
+            "#include <stdio.h>\n" +
+                    "#include <limits.h>\n" +
+                    "\n" +
+                    "// Number of vertices in the graph\n" +
+                    "#define V 9\n" +
+                    "\n" +
+                    "// Function to find the vertex with the minimum distance value\n" +
+                    "// from the set of vertices not yet included in the shortest path tree\n" +
+                    "int minDistance(int dist[], int sptSet[]) {\n" +
+                    "    int min = INT_MAX, min_index;\n" +
+                    "\n" +
+                    "    for (int v = 0; v < V; v++) {\n" +
+                    "        if (sptSet[v] == 0 && dist[v] <= min) {\n" +
+                    "            min = dist[v];\n" +
+                    "            min_index = v;\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    return min_index;\n" +
+                    "}\n" +
+                    "\n" +
+                    "// Function to print the constructed distance array\n" +
+                    "void printSolution(int dist[], int n) {\n" +
+                    "    printf(\"Vertex \\t Distance from Source\\n\");\n" +
+                    "    for (int i = 0; i < V; i++)\n" +
+                    "        printf(\"%d \\t\\t %d\\n\", i, dist[i]);\n" +
+                    "}\n" +
+                    "\n" +
+                    "// Function that implements Dijkstra's single source shortest path algorithm\n" +
+                    "// for a graph represented using adjacency matrix representation\n" +
+                    "void dijkstra(int graph[V][V], int src) {\n" +
+                    "    int dist[V];     // The output array dist[i] holds the shortest distance from src to i\n" +
+                    "    int sptSet[V];   // sptSet[i] is true if vertex i is included in the shortest\n" +
+                    "                     // path tree or the shortest distance from src to i is finalized\n" +
+                    "\n" +
+                    "    // Initialize all distances as INFINITE and sptSet[] as false\n" +
+                    "    for (int i = 0; i < V; i++) {\n" +
+                    "        dist[i] = INT_MAX;\n" +
+                    "        sptSet[i] = 0;\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    // Distance of source vertex from itself is always 0\n" +
+                    "    dist[src] = 0;\n" +
+                    "\n" +
+                    "    // Find shortest path for all vertices\n" +
+                    "    for (int count = 0; count < V - 1; count++) {\n" +
+                    "        // Pick the minimum distance vertex from the set of vertices not\n" +
+                    "        // yet processed. u is always equal to src in the first iteration.\n" +
+                    "        int u = minDistance(dist, sptSet);\n" +
+                    "\n" +
+                    "        // Mark the picked vertex as processed\n" +
+                    "        sptSet[u] = 1;\n" +
+                    "\n" +
+                    "        // Update dist value of the adjacent vertices of the picked vertex\n" +
+                    "        for (int v = 0; v < V; v++) {\n" +
+                    "            // Update dist[v] only if it is not in the sptSet, there is an edge from\n" +
+                    "            // u to v, and the total weight of path from src to v through u is\n" +
+                    "            // less than the current value of dist[v]\n" +
+                    "            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX\n" +
+                    "                && dist[u] + graph[u][v] < dist[v]) {\n" +
+                    "                dist[v] = dist[u] + graph[u][v];\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    // Print the constructed distance array\n" +
+                    "    printSolution(dist, V);\n" +
+                    "}\n" +
+                    "\n" +
+                    "int main() {\n" +
+                    "    // Example graph represented using an adjacency matrix\n" +
+                    "    int graph[V][V] = {\n" +
+                    "        {0, 4, 0, 0, 0, 0, 0, 8, 0},\n" +
+                    "        {4, 0, 8, 0, 0, 0, 0, 11, 0},\n" +
+                    "        {0, 8, 0, 7, 0, 4, 0, 0, 2},\n" +
+                    "        {0, 0, 7, 0, 9, 14, 0, 0, 0},\n" +
+                    "        {0, 0, 0, 9, 0, 10, 0, 0, 0},\n" +
+                    "        {0, 0, 4, 14, 10, 0, 2, 0, 0},\n" +
+                    "        {0, 0, 0, 0, 0, 2, 0, 1, 6},\n" +
+                    "        {8, 11, 0, 0, 0, 0, 1, 0, 7},\n" +
+                    "        {0, 0, 2, 0, 0, 0, 6, 7, 0}\n" +
+                    "    };\n" +
+                    "\n" +
+                    "    // Applying Dijkstra's algorithm starting from vertex 0\n" +
+                    "    dijkstra(graph, 0);\n" +
+                    "\n" +
+                    "    return 0;\n" +
+                    "}\n",
             "This is the solution for implementing a String Matching algorithm in C.",
             "Here's the solution for solving a quadratic equation in C programming.",
             "This is the solution to calculate the factorial of a number in C.",
